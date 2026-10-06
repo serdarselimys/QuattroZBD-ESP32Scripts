@@ -1,3 +1,5 @@
+![Screenshot](4.png)
+
 # Quattro ZBD – ESP32 Quadruped Firmware
 
 Firmware for a 4-legged, 12 DOF quadruped robot dog running on an ESP32.
