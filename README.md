@@ -1,6 +1,6 @@
 # Quattro ZBD – ESP32 Quadruped Firmware
 
-Firmware for a 4-legged (FL / FR / RL / RR) 12-servo quadruped robot running on an ESP32. It was converted from a 6-legged hexapod design; the middle legs are gone, and the gait engine, body leveling and emotes were reworked for four legs.
+Firmware for a 4-legged, 12 DOF quadruped robot dog running on an ESP32.
 
 **Features**
 
@@ -20,10 +20,10 @@ Firmware for a 4-legged (FL / FR / RL / RR) 12-servo quadruped robot running on 
 | ESP32 dev board (ESP32-WROOM, classic ESP32) | Bluetooth gamepad support needs the original ESP32 |
 | PCA9685 16-channel servo driver | I²C address `0x40` |
 | 12 × DS3218 servos | 3 per leg |
-| MPU6050-class IMU | I²C address `0x68`. My unit is actually an MPU6500 (no magnetometer) – the Adafruit MPU6050 library works with it |
-| 2.x" ST7789 TFT, 240×320 (SPI) | Optional but recommended |
+| MPU6050-class IMU | I²C address `0x68`.
+| 2" ST7789 TFT, 240×320 (SPI)
 | Voltage divider on battery | Read on GPIO 32 |
-| 2S/3S battery + buck converters | Servos need their own supply, see warning below |
+| 3S battery + buck converters
 
 > **Power warning:** never power the servos from USB or from the ESP32 board. Use buck converters sized for servo stall current, with a common ground. Don't run USB and battery servo power at the same time while testing unless the grounds and logic supply are set up for it.
 
@@ -100,7 +100,7 @@ TFT_eSPI is configured in the **library's** own `User_Setup.h` (in `Arduino/libr
 
 These are the pins used on my build. Adjust them to your wiring and, if the colors look inverted or the image is mirrored/rotated, try `TFT_INVERSION_ON` / `TFT_INVERSION_OFF` or the `TFT_RGB_ORDER` setting. An upgrade of the TFT_eSPI library overwrites `User_Setup.h`, so keep a copy.
 
-### 3. Optional: Bluetooth gamepad (Bluepad32)
+### 3. Bluetooth gamepad (Bluepad32)
 
 The gamepad is optional. With the normal ESP32 board package the Bluetooth code compiles to no-ops and the robot runs app-only.
 
@@ -116,8 +116,8 @@ Pairing: put the gamepad in Bluetooth pairing mode while the robot is powered. A
 
 ### 4. Flash
 
-1. Put all files from the `Quadruped_Firmwarev1` folder into one sketch folder (the folder name must match the `.ino` name).
-2. Open `Quadruped_Firmwarev1.ino`, select the board and port, and upload.
+1. Put all files from the `Quadruped_Firmware` folder into one sketch folder (the folder name must match the `.ino` name).
+2. Open `Quadruped_Firmware.ino`, select the board and port, and upload.
 3. Open the Serial Monitor at 115200 baud to see boot, IMU and Bluetooth messages.
 
 ---
@@ -179,9 +179,9 @@ Main constants are at the top of `Quadruped_Firmwarev1.ino`. The ones you're mos
 
 1. **Take the load off the feet.** Put the robot on a stand so the legs hang free.
 2. Power the servo rail from the battery/bucks, then the ESP32. Confirm all 12 servos respond and each leg moves in the correct direction. Fix mounting or direction constants before letting it stand.
-3. Check the serial log for the PCA9685 and IMU detection messages. If the IMU is missing, run `IMU_Identify_Test.ino` and `IMU_Standalone_Test.ino`.
+3. Check the serial log for the PCA9685 and IMU detection messages.
 4. Place the robot flat on the ground and let the IMU auto-calibration finish (it also re-runs with R3).
-5. Stand it up, enable balance with A, and test walking at low speed before using emotes.
+5. Stand it up, enable balance with A, and test walking at low speed.
 
 ---
 
@@ -189,7 +189,7 @@ Main constants are at the top of `Quadruped_Firmwarev1.ino`. The ones you're mos
 
 9 emotes: Curious Head Tilt, Cautious Object Tap, The Wiggle, Play Bow, Happy Dance into Sneak, Breathing into Foot Stomp, Matrix Gyro Roll, Push-Ups, Sit & Wave Hello.
 
-Emote mode runs with balance disabled. Several emotes inherited from the hexapod (Intimidate, Victory, Shy Peek, Itchy Scratch, Stadium Ripple) made the 4-legged robot unstable or fall, so they were removed. Use new emotes with care: keep at least three feet on the ground.
+Emote mode runs with balance disabled.
 
 ---
 
@@ -201,9 +201,8 @@ Emote mode runs with balance disabled. Several emotes inherited from the hexapod
 | `Robot_Gait_Mechanism.h` | Gait engine, IMU/Kalman filter, balance, servo output |
 | `Robot_Emotes.h` | Emote animations |
 | `Screen_Settings.h` | TFT telemetry screen, settings menu, UDP telemetry |
-| `Robot_Bluetooth.h` | Optional Bluepad32 gamepad input |
-| `IMU_Standalone_Test.ino`, `IMU_Identify_Test.ino` | IMU diagnostic sketches |
-| `merged_params.csv` | Gait parameters used by the gait engine's simulation reference |
+| `Robot_Bluetooth.h` | Bluepad32 gamepad input |
+
 
 ---
 
@@ -229,8 +228,3 @@ Servos can pinch fingers and the robot can fall. Keep the emergency stop (SELECT
 ## License
 
 Add your license here (e.g. MIT).
-
-## Related
-
-- Android control app: _add link_
-- Original hexapod project: _add link_
