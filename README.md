@@ -229,4 +229,8 @@ Servos can pinch fingers and the robot can fall. Keep the emergency stop (SELECT
 
 ## License
 
-Add your license here (e.g. MIT).
+Licensed under **Creative Commons Attribution–NonCommercial 4.0 International (CC BY-NC 4.0)**.
+
+You are free to remix, adapt and build upon this design for non-commercial purposes, with appropriate credit. Commercial use of any kind is not permitted.
+
+https://creativecommons.org/licenses/by-nc/4.0/
